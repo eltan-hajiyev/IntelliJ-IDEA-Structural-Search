@@ -1,0 +1,1 @@
+# IntelliJ-IDEA-Structural-Search
