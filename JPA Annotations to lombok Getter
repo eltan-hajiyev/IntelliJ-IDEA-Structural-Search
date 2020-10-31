@@ -1,0 +1,8 @@
+<replaceConfiguration name="entity annotation to lombok Getter" text="class $Class$ { &#10;    @$Annotation$&#10;  $FieldType$ $Field$;&#10;}" recursive="false" caseInsensitive="true" type="JAVA" pattern_context="member" reformatAccordingToStyle="false" shortenFQN="false" replacement="class $Class$ {&#10;  $Method2$&#10;}">
+  <constraint name="__context__" within="" contains="" />
+  <constraint name="Class" target="true" within="" contains="" />
+  <constraint name="FieldType" within="" contains="" />
+  <constraint name="Field" maxCount="2147483647" within="" contains="" />
+  <constraint name="Annotation" minCount="0" maxCount="2147483647" within="" contains="" />
+  <variableDefinition name="Method2" script="&quot;fieldListString = &quot;&quot;;&#10;for (f in Field) {&#10;    annotationPersistance = f.annotations.findAll{it.qualifiedName.contains(&quot;persistence&quot;)}.collect{it.text}.join(&quot;,&quot;)&#10;    annotationOther = f.annotations.findAll{!it.qualifiedName.contains(&quot;persistence&quot;)}.collect{it.text}.join(&quot;,&quot;)&#10;    &#10;    fieldListString += &quot;&quot; + annotationOther;&#10;    if (annotationPersistance) {&#10;        fieldListString += &quot; @Getter(onMethod=@__({&quot; + annotationPersistance + &quot;}))&quot;&#10;    }&#10;    fieldListString += &quot;&quot; + f.typeElement.text + &quot; &quot; + f.name + &quot;;\n&quot;&#10;}&#10;&#10;return fieldListString;&quot;" />
+</replaceConfiguration>
